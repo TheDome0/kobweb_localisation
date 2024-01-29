@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.kobweb.application)
     alias(libs.plugins.kobwebx.markdown)
+    alias(libs.plugins.libres)
 }
 
 group = "org.example.kobweblocalisation"
@@ -26,6 +27,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(compose.runtime)
+            implementation(libs.libres)
         }
 
         jsMain.dependencies {
@@ -43,4 +45,11 @@ kotlin {
 //            compileOnly(libs.kobweb.api) // Provided by Kobweb backend at runtime
 //        }
     }
+}
+
+libres {
+    // https://github.com/Skeptick/libres#setup
+    generatedClassName = "Res"
+    generateNamedArguments = true
+    baseLocaleLanguageCode = "en"
 }
