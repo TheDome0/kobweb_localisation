@@ -1,5 +1,6 @@
 package org.example.kobweblocalisation.pages
 
+import Res
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.StyleVariable
 import com.varabyte.kobweb.compose.foundation.layout.Box
@@ -74,7 +75,7 @@ fun HomePage() {
                 Column(Modifier.gap(2.cssRem)) {
                     Div(HeadlineTextStyle.toAttrs()) {
                         SpanText(
-                            "Use this template as your starting point for ", Modifier.color(
+                            Res.string.template_starting_point, Modifier.color(
                                 when (ColorMode.current) {
                                     ColorMode.LIGHT -> Colors.Black
                                     ColorMode.DARK -> Colors.White
@@ -91,9 +92,9 @@ fun HomePage() {
                     }
 
                     Div(SubheadlineTextStyle.toAttrs()) {
-                        SpanText("You can read the ")
-                        Link("/about", "About")
-                        SpanText(" page for more information.")
+                        SpanText(Res.string.about_part1)
+                        Link("/about", Res.string.about)
+                        SpanText(Res.string.about_part2)
                     }
 
                     val ctx = rememberPageContext()
@@ -103,7 +104,7 @@ fun HomePage() {
                         // Up to you!
                         ctx.router.tryRoutingTo("/about")
                     }, colorScheme = ColorSchemes.Blue) {
-                        Text("This could be your CTA")
+                        Text(Res.string.cta)
                     }
                 }
             }
