@@ -1,0 +1,14 @@
+site:
+  title: "KobwebLocalisation"
+
+server:
+  files:
+    dev:
+      contentRoot: "build/processedResources/js/main/public"
+      script: "build/dist/js/developmentExecutable/kobweblocalisation.js"
+      api: "build/libs/kobweblocalisation.jar"
+    prod:
+      script: "build/dist/js/productionExecutable/kobweblocalisation.js"
+      siteRoot: ".kobweb/site"
+
+  port: 8080
