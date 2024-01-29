@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <string name="locale">en</string>
+    <string name="template_starting_point">Use this template as your starting point for </string>
+    <string name="about_part1">You can read the </string>
+    <string name="about_part2"> page for more information.</string>
+    <string name="about">About</string>
+    <string name="cta">This could be your CTA</string>
+</resources>

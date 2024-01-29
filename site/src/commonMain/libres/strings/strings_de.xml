@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <string name="locale">de</string>
+    <string name="template_starting_point">Verwenden Sie diese Vorlage als Ausgangspunkt für </string>
+    <string name="about_part1">Lesen Sie die </string>
+    <string name="about_part2"> Seite für mehr Informationen.</string>
+    <string name="about">Über uns</string>
+    <string name="cta">Dies könnte Ihr CTA sein</string>
+</resources>
