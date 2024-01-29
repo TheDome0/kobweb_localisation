@@ -1,5 +1,6 @@
 package org.example.kobweblocalisation.components.sections
 
+import Res
 import androidx.compose.runtime.*
 import com.varabyte.kobweb.browser.dom.ElementTarget
 import com.varabyte.kobweb.compose.css.functions.clamp
@@ -30,10 +31,18 @@ import com.varabyte.kobweb.silk.components.style.ComponentStyle
 import com.varabyte.kobweb.silk.components.style.base
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
+import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import org.jetbrains.compose.web.css.*
+import kotlinx.browser.localStorage
+import kotlinx.browser.window
+import org.example.kobweblocalisation.LOCALE_KEY
 import org.example.kobweblocalisation.components.widgets.IconButton
+import org.example.kobweblocalisation.locales
 import org.example.kobweblocalisation.toSitePalette
+import org.jetbrains.compose.web.attributes.selected
+import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.dom.Option
+import org.jetbrains.compose.web.dom.Select
 
 val NavHeaderStyle by ComponentStyle.base {
     Modifier.fillMaxWidth().padding(1.cssRem)
@@ -98,6 +107,22 @@ enum class SideMenuState {
 }
 
 @Composable
+fun LanguageDropdown() {
+    Select({
+        onChange {
+            localStorage.setItem(LOCALE_KEY, it.target.value)
+            window.location.reload()
+        }
+    }) {
+        Res.locales.forEach { locale ->
+            Option(locale, { if (locale == Res.string.locale) selected() }) {
+                SpanText(locale.uppercase())
+            }
+        }
+    }
+}
+
+@Composable
 fun NavHeader() {
     Row(NavHeaderStyle.toModifier(), verticalAlignment = Alignment.CenterVertically) {
         Link("https://kobweb.varabyte.com") {
@@ -108,6 +133,7 @@ fun NavHeader() {
         Spacer()
 
         Row(Modifier.gap(1.5.cssRem).displayIfAtLeast(Breakpoint.MD), verticalAlignment = Alignment.CenterVertically) {
+            LanguageDropdown()
             MenuItems()
             ColorModeButton()
         }
@@ -122,7 +148,7 @@ fun NavHeader() {
             var menuState by remember { mutableStateOf(SideMenuState.CLOSED) }
 
             ColorModeButton()
-            HamburgerButton(onClick =  { menuState = SideMenuState.OPEN })
+            HamburgerButton(onClick = { menuState = SideMenuState.OPEN })
 
             if (menuState != SideMenuState.CLOSED) {
                 SideMenu(
@@ -167,8 +193,12 @@ private fun SideMenu(menuState: SideMenuState, close: () -> Unit, onAnimationEnd
                 horizontalAlignment = Alignment.End
             ) {
                 CloseButton(onClick = { close() })
-                Column(Modifier.padding(right = 0.75.cssRem).gap(1.5.cssRem).fontSize(1.4.cssRem), horizontalAlignment = Alignment.End) {
+                Column(
+                    Modifier.padding(right = 0.75.cssRem).gap(1.5.cssRem).fontSize(1.4.cssRem),
+                    horizontalAlignment = Alignment.End
+                ) {
                     MenuItems()
+                    LanguageDropdown()
                 }
             }
         }
